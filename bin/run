@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require "./lib/top_movies"
+require"./lib/cli"
 
-TopMovies::CLI.new.run
+CommandLineInterface.new.run

@@ -1,5 +1,4 @@
-class TopMovies::CLI
-
+class CommandLineInterface
   def run
     list_movies
     menu
