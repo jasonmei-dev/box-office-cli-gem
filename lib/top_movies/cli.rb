@@ -1,27 +1,43 @@
 class TopMovies::CLI
 
   def run
-    puts "Welcome! Please enter a year to see its top 10 movies (2014 - 2018):"
-    year = gets.strip.to_i
-    if !year.between?(2014, 2018)
-      puts "Invalid year. Please enter years between 2014 - 2018."
-    else
-      list_movies
-    end
+    list_movies
+    menu
+    goodbye
   end
 
   def list_movies
+    puts "Last Weekend's Box Office Top Ten:"
     puts <<-DOC
-    1. Avengers Infinity War
-    2. Black Panther
-    3. Captain America - Civil War
-    4. Spider-Man Homecoming
-    5. Marvel's The Avengers
-    6. Captain America - Winter Soldier
-    7. Iron Man
-    8. Captain America - The First Avenger
-    9. Thor
-    10. Guardians of the Galaxy
+    1. Crazy Rich Asians, $22.1M
+    2. The Meg, $10.5M
+    3. Mission: Impossible - Fallout, $7.0M
+    4. Searching, $6.1M
+    5. Operation Finale, $6.0M
+    6. Christopher Robin, $5.2M
+    7. Alpha, $4.5M
+    8. The Happytime Murders, $4.4M
+    9. BlacKKKlansman, $4.2M
+    10. Mile 22, $3.6M
     DOC
+  end
+
+  def menu
+    input = nil
+    while input != "exit"
+      puts "Enter the number of the movie to see more info, or 'list' to see the list again, or type 'exit':"
+      input = gets.strip.downcase
+      if input.to_i.between?(1, 10)
+        puts "Movie info"
+      elsif input == "list"
+        list_movies
+      elsif input != "exit"
+        puts "Invalid entry. Please enter 'list' or 'exit':"
+      end
+    end
+  end
+
+  def goodbye
+    puts "Goodbye! Check back next week to see the box office rankings!"
   end
 end
