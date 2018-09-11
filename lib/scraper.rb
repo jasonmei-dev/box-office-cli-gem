@@ -4,20 +4,19 @@ require 'open-uri'
 class Scraper
 
   def self.scrape_movie_list
-    url = Nokogiri::HTML(open("https://www.rottentomatoes.com/browse/box-office/?rank_id=0&country=us"))
-    # binding.pry
+    movies_chart = Nokogiri::HTML(open("https://www.rottentomatoes.com/browse/box-office/?rank_id=0&country=us"))
     movies = []
-    box_office = []
+    earnings = []
 
-    url.css("table td.left a").each do |movie|
+    movies_chart.css("table td.left a").each do |movie|
       movies << movie.text if movies.length < 10
     end
 
-    url.css("table td[7]").each do |earnings|
-      box_office << earnings.text if box_office.length < 10
+    movies_chart.css("table td[7]").each do |earning|
+      earnings << earning.text if earnings.length < 10
     end
-    binding.pry
-    movies
+
+    [movies, earnings].transpose.to_h
   end
 
 end

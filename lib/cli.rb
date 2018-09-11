@@ -14,21 +14,9 @@ class CommandLineInterface
 
   def list_movies
     puts "Last Weekend's Box Office Top Ten:"
-    # puts <<-DOC
-    # 1. Crazy Rich Asians, $22.1M
-    # 2. The Meg, $10.5M
-    # 3. Mission: Impossible - Fallout, $7.0M
-    # 4. Searching, $6.1M
-    # 5. Operation Finale, $6.0M
-    # 6. Christopher Robin, $5.2M
-    # 7. Alpha, $4.5M
-    # 8. The Happytime Murders, $4.4M
-    # 9. BlacKKKlansman, $4.2M
-    # 10. Mile 22, $3.6M
-    # DOC
-    @movies = Scraper.scrape_movie_list
-    @movies.each_with_index do |movie, i|
-      puts "#{i + 1}. #{movie}" 
+    @movies_list = Scraper.scrape_movie_list
+    @movies_list.each_with_index do |(movie, earnings), i|
+      puts "#{i + 1}. #{movie}, #{earnings}"
     end
   end
 
