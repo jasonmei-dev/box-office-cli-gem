@@ -20,6 +20,11 @@ class CommandLineInterface
     end
   end
 
+  def movie_info
+    @movie_info = Scraper.scrape_movie_page
+    @movie_info
+  end
+
   def menu
     input = nil
     while input != "exit"
@@ -27,6 +32,7 @@ class CommandLineInterface
       input = gets.strip.downcase
       if input.to_i.between?(1, 10)
         puts "Movie info"
+        movie_info
       elsif input == "list"
         list_movies
       elsif input != "exit"

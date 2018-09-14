@@ -6,8 +6,10 @@ class Movie
   @@all = []
 
   def initialize
-    
+    @@all << self if @@all.length < 10
   end
 
-
+  def self.all
+    @@all
+  end
 end
