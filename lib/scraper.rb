@@ -18,29 +18,34 @@ class Scraper
     movie_list.css("table td[7]").each do |earning|
       earnings << earning.text if earnings.length < 10
     end
-    # binding.pry
+
     [titles, earnings].transpose.to_h
   end
 
-  def self.scrape_movie_pages
-    all_info = []
+  def self.scrape_movie_page(user_input)
+    movie_page = Nokogiri::HTML(open("https://www.rottentomatoes.com/#{@@movie_links[user_input]}"))
+    info_hash = {}
+    movie_info = []
 
-    @@movie_links.each do |link|
-      movie_page = Nokogiri::HTML(open("https://www.rottentomatoes.com/#{link}"))
-
-      movie_synopsis = movie_page.css("div#movieSynopsis").text.strip
-      movie_critic_score = movie_page.css("span.meter-value")[0].text
-      movie_audience_score = movie_page.css("div.meter-value").text.strip
-
-      all_info << { synopsis: movie_synopsis, critic_score: movie_critic_score, audience_score: movie_audience_score }
-      #
-      # movie_page.css("div.meta-value").each do |info|
-      #   all_info << info.text.strip
-      # end
-      # binding.pry
+    movie_page.css("div.meta-value").each do |info|
+      movie_info << info.text.gsub(/\n/, "").strip
     end
-    # binding.pry
-    all_info
+
+    movie_synopsis = movie_page.css("div#movieSynopsis").text.strip
+    movie_critic_score = movie_page.css("span.meter-value")[0].text
+    movie_audience_score = movie_page.css("div.meter-value").text.strip
+
+    info_hash[:synopsis] = movie_synopsis
+    info_hash[:critic_score] = movie_critic_score
+    info_hash[:audience_score] = movie_audience_score
+    info_hash[:rating] = movie_info[0]
+    info_hash[:genres] = movie_info[1]
+    info_hash[:director] = movie_info[2]
+    info_hash[:writers] = movie_info[3]
+    info_hash[:runtime] = movie_info[5]
+    info_hash[:studio] = movie_info[6]
+
+    info_hash
   end
 
 # synopsis = movie_page.css("div#movieSynopsis").text.strip

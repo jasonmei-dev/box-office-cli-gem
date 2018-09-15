@@ -2,7 +2,7 @@
 # require_relative "./cli"
 
 class Movie
-  attr_accessor :title, :synopsis, :genre, :director, :writers, :main_cast, :runtime, :critic_score, :audience_score
+  attr_accessor :title, :synopsis, :rating, :genres, :director, :writers, :runtime, :studio, :critic_score, :audience_score
   @@all = []
 
   def initialize(title)

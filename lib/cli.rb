@@ -8,7 +8,6 @@ require 'pry'
 class CommandLineInterface
   def run
     list_movies
-    add_attributes_to_movies
     menu
     goodbye
   end
@@ -21,18 +20,27 @@ class CommandLineInterface
     end
   end
 
-  def add_attributes_to_movies
-    Movie.all.each do |movie|
-      attributes_array = Scraper.scrape_movie_pages
-      attributes_array.each do |attributes|
-        movie.add_movie_attributes(attributes)
-      end
-    end
+  def add_attributes_to_movie(index)
+    movie = Movie.all[index]
+    attributes = Scraper.scrape_movie_page(index)
+    movie.add_movie_attributes(attributes)
   end
 
-  # def display_movie_info
-  #   Movie.all[]
-  # end
+  def display_movie_info(index)
+    movie = Movie.all[index]
+    puts <<-DOC.gsub(/^\s*/, "")
+    Title: #{movie.title}
+    Rating: #{movie.rating}
+    Genres: #{movie.genres}
+    Director: #{movie.director}
+    Writers: #{movie.writers}
+    Runtime: #{movie.runtime}
+    Studio: #{movie.studio}
+    Critic Score: #{movie.critic_score}
+    Audience Score: #{movie.audience_score}
+    Synopsis: #{movie.synopsis}
+    DOC
+  end
 
   def menu
     input = nil
@@ -40,11 +48,8 @@ class CommandLineInterface
       puts "Enter the number of the movie to see more info, or 'list' to see the list again, or type 'exit':"
       input = gets.strip.downcase
       if input.to_i.between?(1, 10)
-        movie = Movie.all[input.to_i - 1]
-        puts "Title: #{movie.title}"
-        puts "Critic Score: #{movie.critic_score}"
-        puts "Audience Score: #{movie.audience_score}"
-        puts "Synopsis: #{movie.synopsis}"
+        add_attributes_to_movie(input.to_i - 1)
+        display_movie_info(input.to_i - 1)
       elsif input == "list"
         list_movies
       elsif input != "exit"
