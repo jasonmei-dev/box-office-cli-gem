@@ -20,14 +20,14 @@ class CommandLineInterface
     end
   end
 
-  def add_attributes_to_movie(index)
-    movie = Movie.all[index]
-    attributes = Scraper.scrape_movie_page(index)
+  def add_attributes_to_movie(user_input)
+    movie = Movie.all[user_input]
+    attributes = Scraper.scrape_movie_page(user_input)
     movie.add_movie_attributes(attributes)
   end
 
-  def display_movie_info(index)
-    movie = Movie.all[index]
+  def display_movie_info(user_input)
+    movie = Movie.all[user_input]
     puts <<-DOC.gsub(/^\s*/, "")
     Title: #{movie.title}
     Rating: #{movie.rating}

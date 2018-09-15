@@ -22,8 +22,8 @@ class Scraper
     [titles, earnings].transpose.to_h
   end
 
-  def self.scrape_movie_page(user_input)
-    movie_page = Nokogiri::HTML(open("https://www.rottentomatoes.com/#{@@movie_links[user_input]}"))
+  def self.scrape_movie_page(index)
+    movie_page = Nokogiri::HTML(open("https://www.rottentomatoes.com/#{@@movie_links[index]}"))
     info_hash = {}
     movie_info = []
 
