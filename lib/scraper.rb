@@ -28,7 +28,8 @@ class Scraper
     movie_info = []
 
     movie_page.css("div.meta-value").each do |info|
-      movie_info << info.text.gsub(/\n/, "").strip
+      movie_info << info.text.gsub(/\s+/, " ").strip
+
     end
 
     movie_synopsis = movie_page.css("div#movieSynopsis").text.strip
