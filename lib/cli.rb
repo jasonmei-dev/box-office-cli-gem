@@ -42,7 +42,7 @@ class CommandLineInterface
 
   def menu
     input = nil
-    while input != "exit"
+    until input == "exit"
       puts "Enter the number of the movie to see more info, or 'list' to see the list again, or 'exit' to leave the app:"
       input = gets.strip.downcase
       if input.to_i.between?(1, 10)
@@ -51,12 +51,12 @@ class CommandLineInterface
       elsif input == "list"
         list_movies
       elsif input != "exit"
-        puts "Invalid entry. Please enter 'list' or 'exit':"
+        puts "Invalid entry!".colorize(:red)
       end
     end
   end
 
   def goodbye
-    puts "Peace out homie <3"
+    puts "Peace out homie! <3"
   end
 end
