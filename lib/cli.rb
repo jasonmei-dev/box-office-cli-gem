@@ -6,9 +6,16 @@ require 'pry'
 
 class CommandLineInterface
   def run
+    greeting
     list_movies
     menu
     goodbye
+  end
+
+  def greeting
+    puts "Greetings and salutations, moviegoer! Here's last weekend's box office results!"
+    puts "----------------------".colorize(:green)
+
   end
 
   def list_movies
