@@ -29,12 +29,12 @@ class Scraper
 
     movie_page.css("div.meta-value").each do |info|
       movie_info << info.text.gsub(/\s+/, " ").strip
-
     end
 
     movie_synopsis = movie_page.css("div#movieSynopsis").text.strip
     movie_critic_score = movie_page.css("span.meter-value")[0].text
     movie_audience_score = movie_page.css("div.meter-value").text.strip
+    movie_cast = movie_page.css("div.castSection a span").text.gsub(/^\s*/, "").gsub(/\n/, ", ")
 
     info_hash[:synopsis] = movie_synopsis
     info_hash[:critic_score] = movie_critic_score
@@ -43,13 +43,9 @@ class Scraper
     info_hash[:genres] = movie_info[1]
     info_hash[:director] = movie_info[2]
     info_hash[:writers] = movie_info[3]
-    info_hash[:runtime] = movie_info[5]
-    info_hash[:studio] = movie_info[6]
+    info_hash[:cast] = movie_cast
 
     info_hash
   end
 
-# synopsis = movie_page.css("div#movieSynopsis").text.strip
-# critic_score = movie_page.css("span.meter-value")[0].text
-# audience_score = movie_page.css("div.meter-value").text.strip
 end

@@ -1,8 +1,5 @@
-# require_relative "./version"
-# require_relative "./cli"
-
 class Movie
-  attr_accessor :title, :synopsis, :rating, :genres, :director, :writers, :runtime, :studio, :critic_score, :audience_score
+  attr_accessor :title, :synopsis, :rating, :genres, :director, :writers, :cast, :critic_score, :audience_score
   @@all = []
 
   def initialize(title)

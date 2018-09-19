@@ -1,8 +1,7 @@
 require_relative '../lib/scraper.rb'
 require_relative '../lib/movie.rb'
 
-require 'nokogiri'
-require 'open-uri'
+require 'colorize'
 require 'pry'
 
 class CommandLineInterface
@@ -13,11 +12,12 @@ class CommandLineInterface
   end
 
   def list_movies
-    puts "Last Weekend's Box Office Top Ten:"
+    puts "Last Weekend's Box Office Top Ten:".colorize(:red)
     @movies_list = Scraper.scrape_movie_list
     @movies_list.each_with_index do |(movie, earnings), i|
-      puts "#{i + 1}. #{movie}, #{earnings}"
+      puts "#{i + 1}.".colorize(:blue) + " #{movie}, #{earnings}"
     end
+    puts "----------------------".colorize(:green)
   end
 
   def add_attributes_to_movie(user_input)
@@ -28,24 +28,22 @@ class CommandLineInterface
 
   def display_movie_info(user_input)
     movie = Movie.all[user_input]
-    puts <<-DOC.gsub(/^\s*/, "")
-    Title: #{movie.title}
-    Rating: #{movie.rating}
-    Genres: #{movie.genres}
-    Director: #{movie.director}
-    Writers: #{movie.writers}
-    Runtime: #{movie.runtime}
-    Studio: #{movie.studio}
-    Critic Score: #{movie.critic_score}
-    Audience Score: #{movie.audience_score}
-    Synopsis: #{movie.synopsis}
-    DOC
+    puts "#{movie.title}".colorize(:red)
+    puts "Rating:".colorize(:blue) + " #{movie.rating}"
+    puts "Genres:".colorize(:blue) + " #{movie.genres}"
+    puts "Director:".colorize(:blue) + " #{movie.director}"
+    puts "Writers:".colorize(:blue) + " #{movie.writers}"
+    puts "Cast:".colorize(:blue) + " #{movie.cast}"
+    puts "Critic Score:".colorize(:blue) + " #{movie.critic_score}"
+    puts "Audience Score:".colorize(:blue) + " #{movie.audience_score}"
+    puts "Synopsis:".colorize(:blue) + " #{movie.synopsis}"
+    puts "----------------------".colorize(:green)
   end
 
   def menu
     input = nil
     while input != "exit"
-      puts "Enter the number of the movie to see more info, or 'list' to see the list again, or type 'exit':"
+      puts "Enter the number of the movie to see more info, or 'list' to see the list again, or 'exit' to leave the app:"
       input = gets.strip.downcase
       if input.to_i.between?(1, 10)
         add_attributes_to_movie(input.to_i - 1)
@@ -59,6 +57,6 @@ class CommandLineInterface
   end
 
   def goodbye
-    puts "Goodbye! Check back next week to see the box office rankings!"
+    puts "Peace out homie <3"
   end
 end
