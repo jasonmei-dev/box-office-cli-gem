@@ -5,7 +5,7 @@
 TODO: Delete this and the text above, and describe your gem -->
 Top Movies is a command-line app that allows the user to see information about the top ten movies based on their box office earnings from the most recent weekend. When the user launches the app, they will see a list of movies and be asked to enter the number corresponding to a movie on the list to see its details. The user will also be given the option to see the list again, or quit the app at any point while using the app.
 
-There are 3 classes in this project: a 'Movie' class to represent each movie and store them in an array, a 'Scraper' class to scrape the information from RottenTomatoes, and a "CommandLineInterface" class to interact with the user.
+There are 3 classes in this project: a `Movie` class to represent each movie and store them in an array, a `Scraper` class to scrape the information from RottenTomatoes, and a `CommandLineInterface` class to interact with the user.
 
 ## Installation
 
@@ -26,7 +26,7 @@ Or install it yourself as:
 ## Usage
 
 <!-- TODO: Write usage instructions here -->
-To run the app, simply run the executable file in 'bin/run'.
+To run the app, simply run the executable file in `bin/run`.
 
 ## Development
 
