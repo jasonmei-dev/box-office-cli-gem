@@ -25,7 +25,8 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+<!-- TODO: Write usage instructions here -->
+To run the app, simply run the executable file in 'bin/run'.
 
 ## Development
 
