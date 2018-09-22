@@ -1,11 +1,9 @@
-# Top Movies
+# BoxOfficeCLI
 
 <!-- Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/top_movies`. To experiment with that code, run `bin/console` for an interactive prompt.
 
 TODO: Delete this and the text above, and describe your gem -->
-Top Movies is a command-line app that allows the user to see information about the top ten movies based on their box office earnings from the most recent weekend. When the user launches the app, they will see a list of movies and be asked to enter the number corresponding to a movie on the list to see its details. The user will also be given the option to see the list again, or quit the app at any point while using the app.
-
-There are 3 classes in this project: a `Movie` class to represent each movie and store them in an array, a `Scraper` class to scrape the information from RottenTomatoes, and a `CommandLineInterface` class to interact with the user.
+BoxOfficeCLI is a command-line app that allows the user to see information on last weekend's movie box office. When the user launches the app, they will see a list of movies and be asked to enter the number corresponding to the movie to see more details. The user will also be given the option to see the list again, or quit at any point while using the app.
 
 ## Installation
 
