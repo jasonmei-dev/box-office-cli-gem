@@ -1,10 +1,4 @@
-require_relative '../lib/scraper.rb'
-require_relative '../lib/movie.rb'
-
-require 'colorize'
-require 'pry'
-
-class CommandLineInterface
+class TopMovies::CLI
   def run
     greeting
     list_movies
@@ -20,7 +14,7 @@ class CommandLineInterface
 
   def list_movies
     puts "Last Weekend's Box Office Top Ten:".colorize(:red)
-    @movies_list = Scraper.scrape_movie_list
+    @movies_list = TopMovies::Scraper.scrape_movie_list
     @movies_list.each_with_index do |(movie, earnings), i|
       puts "#{i + 1}.".colorize(:blue) + " #{movie}, #{earnings}"
     end
@@ -28,13 +22,13 @@ class CommandLineInterface
   end
 
   def add_attributes_to_movie(user_input)
-    movie = Movie.all[user_input]
-    attributes = Scraper.scrape_movie_page(user_input)
+    movie = TopMovies::Movie.all[user_input]
+    attributes = TopMovies::Scraper.scrape_movie_page(user_input)
     movie.add_movie_attributes(attributes)
   end
 
   def display_movie_info(user_input)
-    movie = Movie.all[user_input]
+    movie = TopMovies::Movie.all[user_input]
     puts "#{movie.title}".colorize(:red)
     puts "Rating:".colorize(:blue) + " #{movie.rating}"
     puts "Genres:".colorize(:blue) + " #{movie.genres}"

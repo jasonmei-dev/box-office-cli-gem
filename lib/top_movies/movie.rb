@@ -1,4 +1,4 @@
-class Movie
+class TopMovies::Movie
   attr_accessor :title, :synopsis, :rating, :genres, :director, :writers, :cast, :critic_score, :audience_score
   @@all = []
 

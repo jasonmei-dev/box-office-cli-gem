@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
-require "./lib/cli"
+require "bundler/setup"
+require "top_movies"
 
-CommandLineInterface.new.run
+TopMovies::CLI.new.run
