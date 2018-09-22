@@ -1,16 +1,16 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "top_movies/version"
+require "box_office/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "top_movies"
-  spec.version       = TopMovies::VERSION
+  spec.name          = "box_office"
+  spec.version       = BoxOffice::VERSION
   spec.authors       = ["'Jason Mei'"]
   spec.email         = ["'jason.mei403@gmail.com'"]
 
   spec.summary       = %q{A gem that provides information on the weekend movie box office}
-  spec.homepage      = "https://github.com/jmei403/top_movies"
+  spec.homepage      = "https://github.com/jmei403/box-office-cli-gem"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

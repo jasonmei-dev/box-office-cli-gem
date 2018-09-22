@@ -1,4 +1,4 @@
-class TopMovies::Scraper
+class BoxOffice::Scraper
   @@movie_links = []
 
   def self.scrape_movie_list
@@ -8,7 +8,7 @@ class TopMovies::Scraper
 
     movie_list.css("table td.left a").each do |title|
       @@movie_links << title.attr("href")
-      movie = TopMovies::Movie.new(title.text)
+      movie = BoxOffice::Movie.new(title.text)
       titles << movie.title
     end
 

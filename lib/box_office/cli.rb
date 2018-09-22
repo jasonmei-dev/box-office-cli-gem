@@ -1,4 +1,4 @@
-class TopMovies::CLI
+class BoxOffice::CLI
   def run
     greeting
     list_movies
@@ -13,7 +13,7 @@ class TopMovies::CLI
   def list_movies
     puts "---".colorize(:green)
     puts "Last Weekend's Box Office:".colorize(:red)
-    @movies_list = TopMovies::Scraper.scrape_movie_list
+    @movies_list = BoxOffice::Scraper.scrape_movie_list
     @movies_list.each_with_index do |(movie, earnings), i|
       puts "#{i + 1}.".colorize(:blue) + " #{movie}, #{earnings}"
     end
@@ -21,13 +21,13 @@ class TopMovies::CLI
   end
 
   def add_attributes_to_movie(user_input)
-    movie = TopMovies::Movie.all[user_input]
-    attributes = TopMovies::Scraper.scrape_movie_page(user_input)
+    movie = BoxOffice::Movie.all[user_input]
+    attributes = BoxOffice::Scraper.scrape_movie_page(user_input)
     movie.add_movie_attributes(attributes)
   end
 
   def display_movie_info(user_input)
-    movie = TopMovies::Movie.all[user_input]
+    movie = BoxOffice::Movie.all[user_input]
 
     puts "---".colorize(:green)
     puts "#{movie.title}".colorize(:red)
@@ -48,7 +48,7 @@ class TopMovies::CLI
     until input == "exit"
       puts "Enter movie number to see more info, 'list' to see the list again, or 'exit' to leave the app:"
       input = gets.strip.downcase
-      if input.to_i.between?(1, TopMovies::Movie.all.length)
+      if input.to_i.between?(1, BoxOffice::Movie.all.length)
         add_attributes_to_movie(input.to_i - 1)
         display_movie_info(input.to_i - 1)
       elsif input == "list"

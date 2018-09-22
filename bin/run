@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
-require "top_movies"
+require "box_office"
 
-TopMovies::CLI.new.run
+BoxOffice::CLI.new.run
