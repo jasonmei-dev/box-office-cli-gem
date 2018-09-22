@@ -54,7 +54,7 @@ class BoxOffice::CLI
       elsif input == "list"
         list_movies
       elsif input != "exit"
-        puts "Invalid entry! Please try again.".colorize(:red)
+        puts "Whoops, please try again!".colorize(:red)
       end
     end
   end
