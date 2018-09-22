@@ -8,17 +8,16 @@ class TopMovies::CLI
 
   def greeting
     puts "Greetings and salutations, moviegoer! Here's last weekend's box office results!"
-    puts "----------------------".colorize(:green)
-
   end
 
   def list_movies
-    puts "Last Weekend's Box Office Top Ten:".colorize(:red)
+    puts "---".colorize(:green)
+    puts "Last Weekend's Box Office:".colorize(:red)
     @movies_list = TopMovies::Scraper.scrape_movie_list
     @movies_list.each_with_index do |(movie, earnings), i|
       puts "#{i + 1}.".colorize(:blue) + " #{movie}, #{earnings}"
     end
-    puts "----------------------".colorize(:green)
+    puts "---".colorize(:green)
   end
 
   def add_attributes_to_movie(user_input)
@@ -29,30 +28,33 @@ class TopMovies::CLI
 
   def display_movie_info(user_input)
     movie = TopMovies::Movie.all[user_input]
+
+    puts "---".colorize(:green)
     puts "#{movie.title}".colorize(:red)
-    puts "Rating:".colorize(:blue) + " #{movie.rating}"
+    puts "#{movie.synopsis}"
+    puts ""
     puts "Genres:".colorize(:blue) + " #{movie.genres}"
+    puts "Rating:".colorize(:blue) + " #{movie.rating}"
     puts "Director:".colorize(:blue) + " #{movie.director}"
     puts "Writers:".colorize(:blue) + " #{movie.writers}"
     puts "Cast:".colorize(:blue) + " #{movie.cast}"
     puts "Critic Score:".colorize(:blue) + " #{movie.critic_score}"
     puts "Audience Score:".colorize(:blue) + " #{movie.audience_score}"
-    puts "Synopsis:".colorize(:blue) + " #{movie.synopsis}"
-    puts "----------------------".colorize(:green)
+    puts "---".colorize(:green)
   end
 
   def menu
     input = nil
     until input == "exit"
-      puts "Enter the number of the movie to see more info, or 'list' to see the list again, or 'exit' to leave the app:"
+      puts "Enter movie number to see more info, 'list' to see the list again, or 'exit' to leave the app:"
       input = gets.strip.downcase
-      if input.to_i.between?(1, 10)
+      if input.to_i.between?(1, TopMovies::Movie.all.length)
         add_attributes_to_movie(input.to_i - 1)
         display_movie_info(input.to_i - 1)
       elsif input == "list"
         list_movies
       elsif input != "exit"
-        puts "Invalid entry!".colorize(:red)
+        puts "Invalid entry! Please try again.".colorize(:red)
       end
     end
   end

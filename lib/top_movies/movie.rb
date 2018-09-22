@@ -4,7 +4,7 @@ class TopMovies::Movie
 
   def initialize(title)
     @title = title
-    @@all << self if @@all.length < 10
+    @@all << self
   end
 
   def add_movie_attributes(attr_hash)

@@ -7,13 +7,13 @@ class TopMovies::Scraper
     earnings = []
 
     movie_list.css("table td.left a").each do |title|
-      @@movie_links << title.attr("href") if @@movie_links.length < 10
+      @@movie_links << title.attr("href")
       movie = TopMovies::Movie.new(title.text)
-      titles << movie.title if titles.length < 10
+      titles << movie.title
     end
 
     movie_list.css("table td[7]").each do |earning|
-      earnings << earning.text if earnings.length < 10
+      earnings << earning.text
     end
 
     [titles, earnings].transpose.to_h
