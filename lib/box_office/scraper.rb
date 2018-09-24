@@ -1,7 +1,7 @@
 class BoxOffice::Scraper
   @@movie_links = []
 
-  def self.scrape_movie_list
+  def self.scrape_movie_list # creates Movie objects and creates hash with movie titles and earnings from scraped website
     movie_list = Nokogiri::HTML(open("https://www.rottentomatoes.com/browse/box-office/?rank_id=0&country=us"))
     titles = []
     earnings = []
@@ -19,7 +19,7 @@ class BoxOffice::Scraper
     [titles, earnings].transpose.to_h
   end
 
-  def self.scrape_movie_page(index)
+  def self.scrape_movie_page(index) # Scrapes movie webpage and creates hash of movie info
     movie_page = Nokogiri::HTML(open("https://www.rottentomatoes.com/#{@@movie_links[index]}"))
     info_hash = {}
     movie_info = []

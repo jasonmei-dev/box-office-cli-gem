@@ -1,7 +1,7 @@
 class BoxOffice::CLI
   def run
     greeting
-    @movies_list = BoxOffice::Scraper.scrape_movie_list
+    @movies_list = BoxOffice::Scraper.scrape_movie_list # Generates movie list right away to avoid scraping list multiple times
     list_movies
     menu
     goodbye
