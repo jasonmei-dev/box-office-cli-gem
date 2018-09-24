@@ -1,5 +1,4 @@
 class BoxOffice::CLI
-
   def run
     greeting
     @movies_list = BoxOffice::Scraper.scrape_movie_list
