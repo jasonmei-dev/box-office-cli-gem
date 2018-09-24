@@ -4,12 +4,12 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "box_office/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "box_office"
+  spec.name          = "box-office-cli"
   spec.version       = BoxOffice::VERSION
   spec.authors       = ["'Jason Mei'"]
   spec.email         = ["'jason.mei403@gmail.com'"]
 
-  spec.summary       = %q{A gem that provides information on the weekend movie box office}
+  spec.summary       = %q{A gem that provides information on last weekend's movie box office.}
   spec.homepage      = "https://github.com/jmei403/box-office-cli-gem"
   spec.license       = "MIT"
 
