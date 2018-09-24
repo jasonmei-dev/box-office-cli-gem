@@ -1,6 +1,8 @@
 class BoxOffice::CLI
+
   def run
     greeting
+    @movies_list = BoxOffice::Scraper.scrape_movie_list
     list_movies
     menu
     goodbye
@@ -13,7 +15,6 @@ class BoxOffice::CLI
   def list_movies
     puts "---".colorize(:green)
     puts "Last Weekend's Box Office:".colorize(:red)
-    @movies_list = BoxOffice::Scraper.scrape_movie_list
     @movies_list.each_with_index do |(movie, earnings), i|
       puts "#{i + 1}.".colorize(:blue) + " #{movie}, #{earnings}"
     end
