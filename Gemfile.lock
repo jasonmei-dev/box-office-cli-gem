@@ -2,6 +2,8 @@ PATH
   remote: .
   specs:
     box_office (0.1.0)
+      colorize
+      nokogiri
 
 GEM
   remote: https://rubygems.org/
@@ -35,13 +37,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  box_office!
   bundler (~> 1.16)
-  colorize
-  nokogiri
   pry
   rake (~> 10.0)
   rspec (~> 3.0)
-  box_office!
 
 BUNDLED WITH
    1.16.5

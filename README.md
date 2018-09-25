@@ -1,28 +1,18 @@
-# BoxOfficeCLI
+# Box Office CLI
 
 A simple command-line interface gem that scrapes a website and provides information on movies from last weekend's box office.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'box_office'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install box_office
+    $ gem install box-office-cli
 
 ## Usage
 
-To start the app, simply run the executable file `bin/box-office`.
+Type the command below to start the gem:
 
-When the user launches the app, they will see a list of movies and be asked to enter the number corresponding to the movie to see more details. The user will also be given the option to see the list again, or quit at any point while using the app.
+    $ box-office
+
+When you launch the gem, you will see a list of movies and be asked to enter the number corresponding to the movie to see more details. You will also be given the option to see the list again, or quit at any point while using the gem.
 
 ## Development
 
