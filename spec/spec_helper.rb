@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "top_movies"
+require "box_office"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

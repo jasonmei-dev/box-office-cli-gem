@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    box_office (0.1.0)
+    box-office-cli (0.1.0)
       colorize
       nokogiri
 
@@ -37,7 +37,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  box_office!
+  box-office-cli!
   bundler (~> 1.16)
   pry
   rake (~> 10.0)
