@@ -31,13 +31,16 @@ class BoxOffice::CLI
 
     puts "---"
     puts "#{movie.title}".colorize(:red)
-    puts "#{movie.synopsis}"
-    puts ""
-    puts "Genres:".colorize(:blue) + " #{movie.genres}"
-    puts "Rating:".colorize(:blue) + " #{movie.rating}"
-    puts "Director:".colorize(:blue) + " #{movie.director}"
-    puts "Writers:".colorize(:blue) + " #{movie.writers}"
-    puts "Cast:".colorize(:blue) + " #{movie.cast}"
+    puts "#{movie.synopsis}" if !movie.synopsis.nil?
+    puts "" if !movie.synopsis.nil?
+    puts "Genres:".colorize(:blue) + " #{movie.genres}" if !movie.genres.nil?
+    puts "Rating:".colorize(:blue) + " #{movie.rating}" if !movie.rating.nil?
+    puts "Studio:".colorize(:blue) + " #{movie.studio}" if !movie.studio.nil?
+    puts "Director:".colorize(:blue) + " #{movie.director}" if !movie.director.nil?
+    puts "Writers:".colorize(:blue) + " #{movie.writers}" if !movie.writers.nil?
+    puts "Cast:".colorize(:blue) + " #{movie.cast}" if !movie.cast.nil?
+    puts "Release Date:".colorize(:blue) + " #{movie.release_date}" if !movie.release_date.nil?
+    puts "Runtime:".colorize(:blue) + " #{movie.runtime}" if !movie.runtime.nil?
     puts "Critic Score:".colorize(:blue) + " #{movie.critic_score}"
     puts "Audience Score:".colorize(:blue) + " #{movie.audience_score}"
     puts "---"
