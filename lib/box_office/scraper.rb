@@ -28,9 +28,19 @@ class BoxOffice::Scraper
       movie_info << info.text.gsub(/\s+/, " ").strip
     end
 
+    if movie_page.css("span.meter-value")[0].nil?
+      movie_critic_score = "No Score Yet"
+    else
+      movie_critic_score = movie_page.css("span.meter-value")[0].text
+    end
+
+    if movie_page.css("div.audience-score.meter").text.gsub(/\n\s*/, " ").strip == "No Score Yet"
+      movie_audience_score = "No Score Yet"
+    else
+      movie_audience_score = movie_page.css("div.audience-score.meter").text.split[0]
+    end
+
     movie_synopsis = movie_page.css("div#movieSynopsis").text.strip
-    movie_critic_score = movie_page.css("span.meter-value")[0].text
-    movie_audience_score = movie_page.css("div.meter-value").text.strip
     movie_cast = movie_page.css("div.castSection a span").text.gsub(/^\s*/, "").gsub(/\n/, ", ")
 
     info_hash[:synopsis] = movie_synopsis
@@ -41,7 +51,7 @@ class BoxOffice::Scraper
     info_hash[:director] = movie_info[2]
     info_hash[:writers] = movie_info[3]
     info_hash[:cast] = movie_cast
-
+    # binding.pry
     info_hash
   end
 
