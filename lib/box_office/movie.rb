@@ -1,5 +1,5 @@
 class BoxOffice::Movie
-  attr_accessor :title, :synopsis, :rating, :genres, :director, :writers, :cast, :critic_score, :audience_score
+  attr_accessor :title, :synopsis, :rating, :genres, :director, :writers, :cast, :critic_score, :audience_score, :runtime, :studio, :release_date
   @@all = []
 
   def initialize(title)
