@@ -8,16 +8,16 @@ class BoxOffice::CLI
   end
 
   def greeting
-    puts "Greetings and salutations, moviegoer! Here's last weekend's box office results!"
+    puts "Greetings and salutations, moviegoer! Here's last weekend's box office results!".colorize(:green)
   end
 
   def list_movies
-    puts "---".colorize(:green)
+    puts "---"
     puts "Last Weekend's Box Office:".colorize(:red)
     @movies_list.each_with_index do |(movie, earnings), i|
       puts "#{i + 1}.".colorize(:blue) + " #{movie}, #{earnings}"
     end
-    puts "---".colorize(:green)
+    puts "---"
   end
 
   def add_attributes_to_movie(user_input)
@@ -29,7 +29,7 @@ class BoxOffice::CLI
   def display_movie_info(user_input)
     movie = BoxOffice::Movie.all[user_input]
 
-    puts "---".colorize(:green)
+    puts "---"
     puts "#{movie.title}".colorize(:red)
     puts "#{movie.synopsis}"
     puts ""
@@ -40,13 +40,13 @@ class BoxOffice::CLI
     puts "Cast:".colorize(:blue) + " #{movie.cast}"
     puts "Critic Score:".colorize(:blue) + " #{movie.critic_score}"
     puts "Audience Score:".colorize(:blue) + " #{movie.audience_score}"
-    puts "---".colorize(:green)
+    puts "---"
   end
 
   def menu
     input = nil
     until input == "exit"
-      puts "Enter movie number to see more info, 'list' to see the list again, or 'exit' to leave the app:"
+      puts "Enter movie number to see more info, 'list' to see the list again, or 'exit' to leave the app:".colorize(:green)
       input = gets.strip.downcase
       if input.to_i.between?(1, BoxOffice::Movie.all.length)
         add_attributes_to_movie(input.to_i - 1)
@@ -60,6 +60,6 @@ class BoxOffice::CLI
   end
 
   def goodbye
-    puts "Peace out homie! <3"
+    puts "Peace out homie!".colorize(:green) + " <3".colorize(:light_red)
   end
 end
