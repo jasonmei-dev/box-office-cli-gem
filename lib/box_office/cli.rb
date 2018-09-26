@@ -28,17 +28,16 @@ class BoxOffice::CLI
 
   def display_movie_info(user_input)
     movie = BoxOffice::Movie.all[user_input]
-
     puts "---"
     puts "#{movie.title}".colorize(:red)
-    puts "#{movie.synopsis}" if !movie.synopsis.nil?
-    puts "" if !movie.synopsis.nil?
+    puts "#{movie.synopsis}" if movie.synopsis != ""
+    puts "" if movie.synopsis != ""
     puts "Genres:".colorize(:blue) + " #{movie.genres}" if !movie.genres.nil?
     puts "Rating:".colorize(:blue) + " #{movie.rating}" if !movie.rating.nil?
     puts "Studio:".colorize(:blue) + " #{movie.studio}" if !movie.studio.nil?
     puts "Director:".colorize(:blue) + " #{movie.director}" if !movie.director.nil?
     puts "Writers:".colorize(:blue) + " #{movie.writers}" if !movie.writers.nil?
-    puts "Cast:".colorize(:blue) + " #{movie.cast}" if !movie.cast.nil?
+    puts "Cast:".colorize(:blue) + " #{movie.cast}" if movie.cast != ""
     puts "Release Date:".colorize(:blue) + " #{movie.release_date}" if !movie.release_date.nil?
     puts "Runtime:".colorize(:blue) + " #{movie.runtime}" if !movie.runtime.nil?
     puts "Critic Score:".colorize(:blue) + " #{movie.critic_score}"
