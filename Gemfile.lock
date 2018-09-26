@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    box-office-cli (0.1.0)
+    box-office-cli (0.1.2)
       colorize
       nokogiri
 
