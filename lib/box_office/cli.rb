@@ -14,10 +14,26 @@ class BoxOffice::CLI
   def list_movies
     puts "---"
     puts "Last Weekend's Box Office:".colorize(:red)
-    @movies_list.each_with_index do |(movie, earnings), i|
-      puts "#{i + 1}.".colorize(:blue) + " #{movie}, #{earnings}"
+    BoxOffice::Movie.all.each_with_index do |movie, i|
+      puts "#{i + 1}.".colorize(:blue) + " #{movie.title}, #{movie.earnings}"
     end
     puts "---"
+  end
+
+  def menu
+    input = nil
+    until input == "exit"
+      puts "Enter movie number to see more info, 'list' to see the list again, or 'exit' to leave the app:".colorize(:green)
+      input = gets.strip.downcase
+      if input.to_i.between?(1, BoxOffice::Movie.all.length)
+        add_attributes_to_movie(input.to_i - 1) if BoxOffice::Movie.all[input.to_i - 1].rating.nil? # Only scrapes webpage if attributes are 'nil'
+        display_movie_info(input.to_i - 1)
+      elsif input == "list"
+        list_movies
+      elsif input != "exit"
+        puts "Whoops, please try again!".colorize(:red)
+      end
+    end
   end
 
   def add_attributes_to_movie(user_input)
@@ -37,28 +53,12 @@ class BoxOffice::CLI
     puts "Studio:".colorize(:blue) + " #{movie.studio}" if !movie.studio.nil?
     puts "Director:".colorize(:blue) + " #{movie.director}" if !movie.director.nil?
     puts "Writers:".colorize(:blue) + " #{movie.writers}" if !movie.writers.nil?
-    puts "Cast:".colorize(:blue) + " #{movie.cast}" if movie.cast != ""
+    puts "Main Cast:".colorize(:blue) + " #{movie.cast}" if movie.cast != ""
     puts "Release Date:".colorize(:blue) + " #{movie.release_date}" if !movie.release_date.nil?
     puts "Runtime:".colorize(:blue) + " #{movie.runtime}" if !movie.runtime.nil?
     puts "Critic Score:".colorize(:blue) + " #{movie.critic_score}"
     puts "Audience Score:".colorize(:blue) + " #{movie.audience_score}"
     puts "---"
-  end
-
-  def menu
-    input = nil
-    until input == "exit"
-      puts "Enter movie number to see more info, 'list' to see the list again, or 'exit' to leave the app:".colorize(:green)
-      input = gets.strip.downcase
-      if input.to_i.between?(1, BoxOffice::Movie.all.length)
-        add_attributes_to_movie(input.to_i - 1)
-        display_movie_info(input.to_i - 1)
-      elsif input == "list"
-        list_movies
-      elsif input != "exit"
-        puts "Whoops, please try again!".colorize(:red)
-      end
-    end
   end
 
   def goodbye

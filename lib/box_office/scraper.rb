@@ -1,27 +1,21 @@
 class BoxOffice::Scraper
-  @@movie_links = []
-
-  def self.scrape_movie_list # Creates Movie objects and creates hash with movie titles and earnings from scraped website
+  def self.scrape_movie_list # Scrapes website and creates Movie objects
     movie_list = Nokogiri::HTML(open("https://www.rottentomatoes.com/browse/box-office/?rank_id=0&country=us"))
     titles = []
     earnings = []
 
-    movie_list.css("table td.left a").each do |title|
-      @@movie_links << title.attr("href")
-      movie = BoxOffice::Movie.new(title.text)
-      titles << movie.title
+    movie_list.css("table.center.table tr").each_with_index do |row, i|
+      next if i == 0
+      movie = BoxOffice::Movie.new
+      movie.title = row.css("td.left a").text.strip
+      movie.link = row.css("td.left a").attr("href").text.strip
+      movie.earnings = row.css("td[7]").text.strip
     end
-
-    movie_list.css("table td[7]").each do |earning|
-      earnings << earning.text
-    end
-
-    [titles, earnings].transpose.to_h
   end
 
-  def self.scrape_movie_page(index) # Scrapes movie webpage and creates hash of movie info
-    all_info = {}
-    movie_page = Nokogiri::HTML(open("https://www.rottentomatoes.com/#{@@movie_links[index]}"))
+  def self.scrape_movie_page(index) # Scrapes movie webpage and creates hash of movie attributes
+    attributes = {}
+    movie_page = Nokogiri::HTML(open("https://www.rottentomatoes.com/#{BoxOffice::Movie.all[index].link}"))
 
     # Scraping synopsis and cast
     movie_synopsis = movie_page.css("div#movieSynopsis").text.strip
@@ -40,41 +34,39 @@ class BoxOffice::Scraper
       movie_audience_score = movie_page.css("div.audience-score.meter").text.split[0]
     end
 
-    # Scraping basic movie info and storing it into a hash
+    # Scraping basic movie info and storing it in a hash
     info_keys = []
     info_values = []
-
     movie_page.css("ul.content-meta.info div.meta-label.subtle").each { |key| info_keys << key.text.strip }
     movie_page.css("ul.content-meta.info div.meta-value").each { |value| info_values << value.text.gsub(/\n\s*/, "").strip }
-
     info_hash = [info_keys, info_values].transpose.to_h
 
-    # Combining all scraped info into one hash called 'all_info'
+    # Combining all scraped info into one hash called 'attributes'
     info_hash.each do |key, value|
       case key
       when "Rating:"
-        all_info[:rating] = value
+        attributes[:rating] = value
       when "Genre:"
-        all_info[:genres] = value
+        attributes[:genres] = value
       when "Directed By:"
-        all_info[:director] = value
+        attributes[:director] = value
       when "Written By:"
-        all_info[:writers] = value
+        attributes[:writers] = value
       when "In Theaters:"
-        all_info[:release_date] = value
+        attributes[:release_date] = value
       when "Runtime:"
-        all_info[:runtime] = value
+        attributes[:runtime] = value
       when "Studio:"
-        all_info[:studio] = value
+        attributes[:studio] = value
       end
      end
 
-    all_info[:synopsis] = movie_synopsis
-    all_info[:critic_score] = movie_critic_score
-    all_info[:audience_score] = movie_audience_score
-    all_info[:cast] = movie_cast
+    attributes[:synopsis] = movie_synopsis
+    attributes[:critic_score] = movie_critic_score
+    attributes[:audience_score] = movie_audience_score
+    attributes[:cast] = movie_cast
 
-    all_info
+    attributes
   end
 
 end
