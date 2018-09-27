@@ -1,11 +1,8 @@
 class BoxOffice::Scraper
   def self.scrape_movie_list # Scrapes website and creates Movie objects
     movie_list = Nokogiri::HTML(open("https://www.rottentomatoes.com/browse/box-office/?rank_id=0&country=us"))
-    titles = []
-    earnings = []
 
-    movie_list.css("table.center.table tr").each_with_index do |row, i|
-      next if i == 0
+    movie_list.css("table.center.table tr[itemprop='itemListElement']").each do |row|
       movie = BoxOffice::Movie.new
       movie.title = row.css("td.left a").text.strip
       movie.link = row.css("td.left a").attr("href").text.strip
