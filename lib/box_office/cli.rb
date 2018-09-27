@@ -30,7 +30,7 @@ class BoxOffice::CLI
       puts "---"
       input = gets.strip.downcase
       if input.to_i.between?(1, BoxOffice::Movie.all.length)
-        add_attributes_to_movie(input.to_i - 1) if BoxOffice::Movie.all[input.to_i - 1].rating.nil? # Only scrapes webpage if attributes are 'nil'
+        add_attributes_to_movie(input.to_i - 1) if BoxOffice::Movie.all[input.to_i - 1].rating.nil? # Only scrapes webpage if attributes are 'nil' to prevent scraping multiple times
         display_movie_info(input.to_i - 1)
       elsif input == "list"
         list_movies
