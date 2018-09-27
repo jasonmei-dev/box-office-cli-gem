@@ -49,6 +49,7 @@ class BoxOffice::CLI
   def display_movie_info(user_input)
     movie = BoxOffice::Movie.all[user_input]
     movie.print_info
+    puts "---"
   end
 
   def goodbye

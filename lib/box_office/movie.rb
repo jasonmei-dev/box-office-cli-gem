@@ -28,7 +28,6 @@ class BoxOffice::Movie
     puts "Runtime:".colorize(:blue) + " #{self.runtime}" if !self.runtime.nil?
     puts "Critic Score:".colorize(:blue) + " #{self.critic_score}"
     puts "Audience Score:".colorize(:blue) + " #{self.audience_score}"
-    puts "---"
   end
 
   def self.all
