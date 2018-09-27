@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jason Mei"]
   spec.email         = ["jason.mei403@gmail.com"]
 
-  spec.summary       = %q{A gem that provides information on last weekend's movie box office.}
+  spec.summary       = %q{A simple gem that provides information on last weekend's movie box office.}
   spec.homepage      = "https://github.com/jmei403/box-office-cli-gem"
   spec.license       = "MIT"
 
