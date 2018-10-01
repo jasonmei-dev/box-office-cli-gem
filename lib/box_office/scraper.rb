@@ -15,20 +15,20 @@ class BoxOffice::Scraper
     movie_page = Nokogiri::HTML(open("https://www.rottentomatoes.com/#{BoxOffice::Movie.all[index].link}"))
 
     # Scraping synopsis and cast
-    movie_synopsis = movie_page.css("div#movieSynopsis").text.strip
-    movie_cast = movie_page.css("div.castSection a span").text.gsub(/^\s*/, "").gsub(/\n/, ", ")
+    attributes[:synopsis] = movie_page.css("div#movieSynopsis").text.strip
+    attributes[:cast] = movie_cast = movie_page.css("div.castSection a span").text.gsub(/^\s*/, "").gsub(/\n/, ", ")
 
     # Scraping critic and audience scores
     if movie_page.css("span.meter-value")[0].nil?
-      movie_critic_score = "No Score Yet"
+      attributes[:critic_score] = "No Score Yet"
     else
-      movie_critic_score = movie_page.css("span.meter-value")[0].text
+      attributes[:critic_score] = movie_page.css("span.meter-value")[0].text
     end
 
     if movie_page.css("div.audience-score.meter").text.strip == "No Score Yet"
-      movie_audience_score = "No Score Yet"
+      attributes[:audience_score] = "No Score Yet"
     else
-      movie_audience_score = movie_page.css("div.audience-score.meter").text.split[0]
+      attributes[:audience_score] = movie_page.css("div.audience-score.meter").text.split[0]
     end
 
     # Scraping basic movie info and storing it in a hash
@@ -57,11 +57,6 @@ class BoxOffice::Scraper
         attributes[:studio] = value
       end
      end
-
-    attributes[:synopsis] = movie_synopsis
-    attributes[:critic_score] = movie_critic_score
-    attributes[:audience_score] = movie_audience_score
-    attributes[:cast] = movie_cast
 
     attributes
   end
